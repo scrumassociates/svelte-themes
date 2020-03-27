@@ -1,9 +1,9 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount } from "svelte";
   export let alt = "";
   export let autocomplete = "off";
-  export let autofocus = true;
-  export let disabled = false;
+  export let autofocus = "false";
+  export let disabled = "false";
   export let hint = "There's a problem here.";
   export let id = "id";
   export let label = "label";
@@ -13,21 +13,27 @@
   export let minlength = undefined;
   export let name = "name";
   export let placeholder = "placeholder";
-  export let readonly = false;
+  export let readonly = "false";
   export let regex = undefined;
-  export let required = false;
+  export let required = "false";
   export let type = "text"; // date, email, number, password, tel, text
   export let value = "";
 
-  onMount (() => {
-    console.log(id);
-    if (autofocus) {
-      setTimeout(() => {
-        console.log(document.getElementById(id));
-        document.getElementById(id).focus();
-      }, 3000);
+  onMount(() => {
+    const input = document.getElementById(id);
+    if (autofocus === "true") {
+      input.focus();
     }
-  })
+    if (disabled === "true") {
+      input.disabled = true;
+    }
+    if (readonly === "true") {
+      input.readOnly = true;
+    }
+    if (required === "true") {
+      input.required = true;
+    }
+  });
 
   function changeHandler(e) {
     value = e.target.value;
@@ -56,7 +62,7 @@
   }
   .input-group > input {
     --input-border: 1px;
-    width: calc(100% - (2*var(--input-border)));
+    width: calc(100% - (2 * var(--input-border)));
     margin: 0;
     padding: 8px;
     outline: none;
@@ -73,6 +79,17 @@
     border-color: var(--theme-neutral-500);
     box-shadow: 2px 2px 2px 1px var(--theme-neutral-100);
   }
+  .input-group > input:invalid {
+    outline: none;
+    border: 1px solid var(--theme-alert-error-fg);
+    box-shadow: none;
+  }
+  .input-group > input:invalid:active,
+  .input-group > input:invalid:focus {
+    outline: none;
+    border: 1px solid var(--theme-alert-error-fg);
+    box-shadow: 2px 2px 2px 1px var(--theme-neutral-100);
+  }
   .input-hint {
     color: var(--theme-alert-error-fg);
     margin: 0;
@@ -80,20 +97,19 @@
     font-size: 70%;
     font-weight: 700;
   }
-
 </style>
 
 <div class="input-group">
   <label for={id}>{label}</label>
-  <input 
-    {alt} 
+  <input
+    {alt}
     {autocomplete}
     {id}
     {name}
     {placeholder}
     {type}
     step="any"
-    on:change|preventDefault={changeHandler} 
+    on:change|preventDefault={changeHandler}
     on:input|preventDefault={inputHandler}
     {value} />
   <div class="input-hint">{hint}&nbsp;</div>

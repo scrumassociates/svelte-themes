@@ -42,13 +42,13 @@
   .container {
     --container-margin: 0px;
     --container-padding: 8px;
-    width: calc(100%-(2 * var(--container-margin)));
+    width: calc(100%- (2 * var(--container-margin)));
     margin: var(--container-margin);
     padding: 24px;
   }
 </style>
 
-  <!-- export let alt = "";
+<!-- export let alt = "";
   export let autocomplete = "off";
   export let autofocus = "";
   export let disabled = "";
@@ -67,23 +67,26 @@
   export let type = "text"; // date, email, number, password, tel, text
   export let value = ""; -->
 
-  <div class="container">
-    <h4>{value}&nbsp;</h4>
+<div class="container">
+  <h4>{value}&nbsp;</h4>
 
-    <Input 
-      alt="Enter first name" 
-      hint="Enter first name" 
-      id="firstName" 
-      label="First Name" 
-      maxlength=10 
-      name="firstName" 
-      placeholder="first name"
-      type="text"
-      bind:value />
+  <Input
+    alt="Enter first name"
+    autofocus="false"
+    hint="Enter first name"
+    id="firstName"
+    label="First Name"
+    maxlength="10"
+    name="firstName"
+    placeholder="first name"
+    type="email"
+    disabled="false"
+    readonly="false"
+    required="true"
+    bind:value />
 
-  </div>
-  <!-- <div class="alert-info">This is an info alert.</div>
+</div>
+<!-- <div class="alert-info">This is an info alert.</div>
   <div class="alert-success">This is a success alert.</div>
   <div class="alert-warning">This is a warning alert.</div>
   <div class="alert-error">This is an error alert.</div> -->
-
